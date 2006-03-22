@@ -1,7 +1,7 @@
 ##########################################################################################################
 #	GD::Graph::histogram
 #
-#	Copyright 2004, William Miller & Snehanshu Shah
+#	Copyright 2007, Snehanshu Shah
 #
 ##########################################################################################################
 package GD::Graph::histogram;
@@ -10,7 +10,7 @@ use strict;
 BEGIN {
 	use Exporter ();
 	use vars qw ($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
-	$VERSION     = 1.00;
+	$VERSION     = 1.10;
 	@ISA         = qw (Exporter);
 	#Give a hoot don't pollute, do not export more than needed by default
 	@EXPORT      = qw ();
@@ -115,7 +115,7 @@ sub _histogram_bins {
 	my $bins;
 	my @cutPoints;
 	my $cntr = 0;
-	while ( $upper <= $max && $cntr <= $nbins) {
+	while ( $upper <= $max && $cntr < $nbins) {
 		$upper = $lower + $binwidth;
 		push( @cutPoints, [$lower, $upper] );
 		$lower = $upper;
@@ -147,9 +147,15 @@ sub _histogram_frequency {
 		push( @freqs, 0 );
 	}
 
-	foreach (@$data) {
-		for( my $i = 0; $i < scalar( @$cutPoints ); $i++ ) {
-			if( $_ >= $cutPoints->[$i]->[0] && $_ < $cutPoints->[$i]->[1] ) {
+	foreach (@$data) 
+	{
+		for( my $i = 0; $i < scalar( @$cutPoints ); $i++ ) 
+		{
+		if( ($_ >= $cutPoints->[$i]->[0] && $_ < $cutPoints->[$i]->[1])
+			||
+			($i == (scalar (@$cutPoints) - 1) && $_ >= $cutPoints->[$i]->[1]) ) 
+			{	
+
 				$freqs[$i]++;
 			}
 		}
@@ -178,7 +184,7 @@ sub _numformat {
     		my $no = $1; 
 		my $fraction = $2; 
 		$fraction =~ s/0+$//;
-		$v = ($fraction == "") ? $no : "$no.$fraction";
+		$v = (length($fraction) == 0) ? $no : "$no.$fraction";
 	}
 
 	if ($v =~ /\./){
@@ -200,7 +206,6 @@ sub _has_default {
     exists $Defaults{$attr} || $self->SUPER::_has_default($attr);
 }
 
-"Just another true value";
 
 ########################################### main pod documentation begin ##
 # Below is the stub of documentation for your module. You better edit it!
@@ -229,7 +234,7 @@ data set at a time.
 
 Create the graph
 
-my $graph = new GD::Graph::histogram(400,600);
+	my $graph = new GD::Graph::histogram(400,600);
 
 Set graph options
 
@@ -247,11 +252,11 @@ Set graph options
 
 plot the graph
 
-	my $gd = $graph->plot(\@data) or die $my_graph->error;
+	my $gd = $graph->plot($data) or die $graph->error;
 
 save the graph to a file
 
-	open(IMG, '>file.png') or die $!;
+	open(IMG, '>histogram.png') or die $!;
 	binmode IMG;
 	print IMG $gd->png;
 
@@ -293,9 +298,18 @@ module, you could get burned. I may change them at any time.
 
 =head1 AUTHOR
 
-	William Miller & Snehanshu Shah
+	Snehanshu Shah
 	perl@whizdog.com
 	http://www.whizdog.com
+
+=head1 ACKNOWLEDGEMENTS
+
+Thanks for all the feedback, bug reports and bug fixes
+
+Martin Corley 
+Jonathan Barber 
+William Miller
+
 
 =head1 COPYRIGHT
 
@@ -311,5 +325,4 @@ perl(1), GD::Graph
 
 =cut
 
-1; #this line is important and will help the module return a true value
 __END__
