@@ -1,0 +1,49 @@
+Format-Specification: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=135
+Maintainer: Snehanshu Shah
+    	perl@whizdog.com
+    	http://www.whizdog.com
+Source: http://search.cpan.org/dist/GD-Graph-histogram/
+Name: GD-Graph-histogram
+DISCLAIMER: This copyright info was automatically extracted 
+ from the perl module. It may not be accurate, so you better 
+ check the module sources in order to ensure the module for its 
+ inclusion in Debian or for general legal information. Please, 
+ if licensing information is incorrectly generated, file a bug 
+ on dh-make-perl.
+ NOTE: Don't forget to remove this disclaimer once you are happy
+ with this file.
+
+Files: *
+Copyright: Snehanshu Shah
+    	perl@whizdog.com
+    	http://www.whizdog.com
+License: GPL-2+ or Artistic
+
+Files: debian/*
+Copyright: 2011, Ben Oberkfell <boberkfe@genome.wustl.edu>
+License: GPL-2+ or GPL-1+ or Artistic
+
+License: GPL-2+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; version 2 dated June, 1991, or (at your
+ option) any later version.
+ .
+ On Debian GNU/Linux systems, the complete text of version 2 of the GNU
+ General Public License can be found in `/usr/share/common-licenses/GPL-2'
+
+License: GPL-1+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 1, or (at your option)
+ any later version.
+ .
+ On Debian GNU/Linux systems, the complete text of the GNU General
+ Public License can be found in `/usr/share/common-licenses/GPL'
+
+License: Artistic
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the Artistic License, which comes with Perl.
+ .
+ On Debian GNU/Linux systems, the complete text of the Artistic License
+ can be found in `/usr/share/common-licenses/Artistic'
